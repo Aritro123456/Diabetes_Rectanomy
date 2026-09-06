@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { validateImageFile, validateImageDimensions } from './lib/review.ts';
+assert.equal(validateImageFile({type:'image/png',size:1024}), true);
+assert.equal(validateImageFile({type:'image/svg+xml',size:1024}), false);
+assert.equal(validateImageFile({type:'image/jpeg',size:0}), false);
+assert.equal(validateImageFile({type:'image/jpeg',size:10485761}), false);
+assert.equal(validateImageDimensions(2048,2048), true);
+assert.equal(validateImageDimensions(1,2048), false);
+assert.equal(validateImageDimensions(10000,10000), false);
+console.log('Image validation checks passed');
