@@ -8,6 +8,7 @@ import { inspectImage, predictedGrade } from '../../lib/analysis';
 import type { Quality, Prediction, Run } from '../../lib/analysis';
 import { CaseTools, EvaluationTools, Heatmap } from './features';
 import './features.css';
+import { homeUrl } from '../../lib/site-paths';
 
 type Case = { id: string; eye: string; grade: number | null; status: string; quality: string; image?: string; notes?: string; review?: string; imageSha256?: string; qualityCheck?: Quality; analysis?: Prediction };
 const initial: Case[] = [
@@ -79,7 +80,7 @@ export default function Home() {
  return <div className="shell">
   <a href="#main" className="skip">Skip to content</a>
   <aside className="sidebar">
-   <a href="/" className="brand"><span className="brandmark"><Eye size={23}/></span>retina<span>review</span></a>
+   <a href={homeUrl} className="brand"><span className="brandmark"><Eye size={23}/></span>retina<span>review</span></a>
    <div className="workspace-label">RESEARCH WORKSPACE</div>
    <nav aria-label="Main navigation">{[['Workspace', LayoutGrid], ['Evaluation', Activity], ['Project', FlaskConical]].map(([name, Icon]) => <button key={String(name)} className={tab === name ? 'nav-item active' : 'nav-item'} onClick={() => setTab(String(name))}>{typeof Icon !== 'string' && <Icon size={18}/>}<span>{String(name)}</span>{name === 'Workspace' && <span className="nav-count">{cases.length}</span>}</button>)}</nav>
    <div className="sidebar-bottom"><div className="research-card"><ShieldCheck size={22}/><strong>Human review, always.</strong><p>Research prototype.<br/>Not for clinical decisions.</p></div><button className="help" onClick={() => { setTab('Project'); }}><CircleHelp size={17}/> About this prototype <ArrowRight size={15}/></button><div className="profile"><span className="avatar">R</span><div><strong>Researcher</strong><small>Local demo session</small></div><span className="live-dot"/></div></div>
@@ -100,6 +101,7 @@ export default function Home() {
   {modal && <div className="modal-backdrop" onClick={() => setModal(false)}><section className="upload-modal" role="dialog" aria-modal="true" aria-labelledby="upload-title" onClick={e => e.stopPropagation()} onKeyDown={e => {if(e.key === 'Escape') setModal(false); if(e.key === 'Tab') { const nodes = e.currentTarget.querySelectorAll<HTMLElement>('button,input'); const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}}}}><button autoFocus className="modal-close" aria-label="Close upload" onClick={() => setModal(false)}><X size={20}/></button><span className="upload-icon"><Upload size={28}/></span><h2 id="upload-title">A new perspective.</h2><p>Open a fundus image for manual review.<br/>The image stays in your browser.</p><div className="dropzone" onDragOver={e => e.preventDefault()} onDrop={e => {e.preventDefault(); void upload(e.dataTransfer.files[0]);}}><FileImage size={34}/><strong>Drop an image here</strong><span>JPEG or PNG · up to 10 MB</span><button className="primary" onClick={() => input.current?.click()}>Browse files <ArrowRight size={16}/></button><input className="file-input" ref={input} type="file" accept="image/jpeg,image/png" aria-label="Choose fundus image" onChange={e => void upload(e.target.files?.[0])}/></div>{notice && <p role="alert">{notice}</p>}<small>No automatic diagnosis. Reviewer assessment only.</small></section></div>}
  </div>;
 }
+
 
 
 

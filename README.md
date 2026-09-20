@@ -52,3 +52,12 @@ Run `node check-landing.mjs` while the development server is active to verify bo
 The import schemas and a downloadable synthetic evaluation example are available in the dashboard. No model checkpoint was provided; inference, model-generated attribution and actual IDRiD results remain external prerequisites. All inputs stay in browser memory; refreshing clears data.
 
 Run `node --experimental-strip-types check-analysis.mjs` for import validation, metric edge cases, quality and report checks. Browser interaction QA could not run because the computer-use runtime failed to initialize in the Windows sandbox.
+
+## GitHub Pages
+
+Live site: https://aritro123456.github.io/Diabetes_Rectanomy/
+Dashboard: https://aritro123456.github.io/Diabetes_Rectanomy/dashboard/
+
+`npm run build:pages` builds the existing React screens as two static Vite entry points in `dist-pages`. `node check-pages.mjs` verifies the entry points and base-prefixed assets. Pushes to main run `.github/workflows/pages.yml` to test, build and deploy using GitHub Actions. The repository Pages source must be GitHub Actions.
+
+The original `npm run dev` / `npm run build` commands remain available for the existing Sites setup. GitHub Pages is public static hosting; no server, authentication, patient data or model inference is deployed. Uploaded images and review records remain browser-local.
