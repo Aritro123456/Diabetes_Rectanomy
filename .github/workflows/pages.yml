@@ -20,8 +20,11 @@ jobs:
       - run: npm ci
       - run: node --experimental-strip-types check-analysis.mjs
       - run: node --experimental-strip-types check.mjs
+      - run: node --experimental-strip-types check-diabetes-api.mjs
       - run: npx tsc --noEmit
       - run: npm run build:pages
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
       - run: node check-pages.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -39,3 +42,4 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+

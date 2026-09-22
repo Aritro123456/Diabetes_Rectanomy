@@ -25,7 +25,15 @@ Original implementation: dark review workspace, mint accents, pill navigation, s
 - Sample grading is explicitly illustrative. Uploads never receive fabricated predictions.
 - Evaluation page shows missing results instead of invented metrics.
 
-## Next integration
+## Backend integration
+
+The **Diabetes API** dashboard tab connects to `GET /health` and `POST /predict` in the FastAPI service under `backend`. It validates eight numeric measurements, checks model readiness, and displays actual backend results or errors. This numeric diabetes classifier is separate from retinal review; it cannot generate DR grades or image heatmaps.
+
+See [backend setup](backend/README.md). Locally run both servers and use `http://127.0.0.1:8000`. For the public site, set the GitHub Actions repository variable `VITE_API_URL` to your separately hosted HTTPS API and rerun deployment, or enter its URL in the dashboard. For local frontend builds, set the `VITE_API_URL` environment variable before starting/building. Numeric measurements leave the browser only when submitted to the selected API; they are not stored by the frontend.
+
+Run `node --experimental-strip-types check-diabetes-api.mjs` for client validation and response checks. Optionally set `API_TEST_URL` to test against a running backend. No hosted API URL or trained model has been supplied; public inference remains unavailable until both exist.
+
+## Retinal inference
 
 Connect a separately hosted inference API with shared preprocessing, authenticated case storage, and measured held-out evaluation. This frontend does not run RETFound or RetiZero and is not a clinically validated medical device.
 

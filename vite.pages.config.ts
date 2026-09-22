@@ -7,7 +7,7 @@ export default defineConfig({
  root: root + 'pages',
  base: '/Diabetes_Rectanomy/',
  publicDir: root + 'public',
- define: { __PAGES_BASE__: JSON.stringify('/Diabetes_Rectanomy') },
+ define: { __PAGES_BASE__: JSON.stringify('/Diabetes_Rectanomy'), __API_URL__: JSON.stringify(process.env.VITE_API_URL || '') },
  resolve: { alias: { '@': root } },
  plugins: [react()],
  css: { postcss: { plugins: [tailwindcss()] } },
@@ -17,3 +17,4 @@ export default defineConfig({
   rollupOptions: { input: { home: root + 'pages/index.html', dashboard: root + 'pages/dashboard/index.html' } },
  },
 });
+

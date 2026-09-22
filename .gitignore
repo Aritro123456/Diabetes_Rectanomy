@@ -38,3 +38,8 @@ next-env.d.ts
 /work/
 
 /dist-pages/
+
+__pycache__/
+.pytest_cache/
+backend/.venv/
+backend/models/

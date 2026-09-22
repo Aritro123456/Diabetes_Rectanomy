@@ -45,6 +45,7 @@ export default defineConfig(async () => {
   const { cloudflare } = await import('@cloudflare/vite-plugin');
 
   return {
+    define: { __API_URL__: JSON.stringify(process.env.VITE_API_URL || '') },
     css: { postcss: { plugins: [tailwindcss()] } },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
@@ -59,3 +60,4 @@ export default defineConfig(async () => {
     ],
   };
 });
+
