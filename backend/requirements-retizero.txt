@@ -1,0 +1,11 @@
+# Python 3.10: upstream torch 1.13 does not support the local Python 3.12 environment.
+# Adapter dependency set; real checkpoint inference still requires verification.
+-r requirements.txt
+torch==1.13.1
+torchvision==0.14.1
+numpy==1.24.2
+transformers==4.27.4
+scikit-learn==1.2.1
+pandas==1.5.3
+tqdm>=4.64,<5
+kornia==0.6.10

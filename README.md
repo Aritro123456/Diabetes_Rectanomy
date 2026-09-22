@@ -69,3 +69,7 @@ Dashboard: https://aritro123456.github.io/Diabetes_Rectanomy/dashboard/
 `npm run build:pages` builds the existing React screens as two static Vite entry points in `dist-pages`. `node check-pages.mjs` verifies the entry points and base-prefixed assets. Pushes to main run `.github/workflows/pages.yml` to test, build and deploy using GitHub Actions. The repository Pages source must be GitHub Actions.
 
 The original `npm run dev` / `npm run build` commands remain available for the existing Sites setup. GitHub Pages is public static hosting; no server, authentication, patient data or model inference is deployed. Uploaded images and review records remain browser-local.
+
+## RetiZero image API
+
+A RetiZero connection panel is available below the workspace image viewer. Open an image, check the API, then explicitly send it for inference. Results are separate 14-label disease rankings; they do not overwrite five-grade DR findings or evaluation data. The image leaves the browser only on explicit submission. See [RetiZero setup](backend/README.md#retizero-image-prediction). Official weights, a compatible runtime, and a hosted HTTPS API remain prerequisites. The adapter and failure paths are tested with stubs; actual checkpoint inference has not been run.

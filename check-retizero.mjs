@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import { parseRetiZero } from './lib/retizero.ts';
+const hash='a'.repeat(64);
+const result={imageSha256:hash,model:'test-only',task:'zero-shot-disease-ranking',scoreType:'uncalibrated-softmax',scores:Array.from({length:14},(_,i)=>({label:`Label ${i}`,score:i===0?1:0}))};
+assert.equal(parseRetiZero(result,hash).scores.length,14);
+assert.throws(()=>parseRetiZero(result,'b'.repeat(64)));
+assert.throws(()=>parseRetiZero({...result,scoreType:'calibrated'},hash));
+assert.throws(()=>parseRetiZero({...result,scores:[{label:'invalid',score:NaN}]},hash));
+assert.throws(()=>parseRetiZero({...result,scores:result.scores.map(s=>({...s,score:1}))},hash));
+assert.throws(()=>parseRetiZero({...result,scores:result.scores.map(s=>({...s,label:'duplicate'}))},hash));
+console.log('RetiZero image identity and score validation passed');

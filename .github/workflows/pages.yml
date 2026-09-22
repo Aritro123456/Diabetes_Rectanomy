@@ -21,6 +21,7 @@ jobs:
       - run: node --experimental-strip-types check-analysis.mjs
       - run: node --experimental-strip-types check.mjs
       - run: node --experimental-strip-types check-diabetes-api.mjs
+      - run: node --experimental-strip-types check-retizero.mjs
       - run: npx tsc --noEmit
       - run: npm run build:pages
         env:
